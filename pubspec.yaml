@@ -39,6 +39,7 @@ dependencies:
   color_shader: ^1.0.0
   responsive_builder: ^0.4.3
   google_fonts: ^3.0.1
+  routemaster: ^1.0.1
 
 dev_dependencies:
   flutter_test:
