@@ -1,10 +1,13 @@
-import 'dart:html';
-
+import 'package:color_shader_web/providers/state.dart';
+import 'package:color_shader_web/providers/value.dart';
 import 'package:flutter/material.dart';
 import 'package:color_shader_web/routes.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:responsive_builder/responsive_builder.dart';
+// import 'package:flutter/rendering.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+// import 'package:responsive_builder/responsive_builder.dart';
+import 'package:routemaster/routemaster.dart';
 
 // import 'package:color_shader/color_shader.dart';
 
@@ -17,36 +20,32 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: routes,
-      initialRoute: initialRoute,
-      title: 'Color Shader',
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ValuesProvider())
+      ],
+      child: MaterialApp.router(
+        routerDelegate: RoutemasterDelegate(routesBuilder: (_) => routes),
+        routeInformationParser: const RoutemasterParser(),
+        title: 'Color Shader',
+        theme: ThemeData(
+            fontFamily: GoogleFonts.openSans().fontFamily,
+            primaryColorDark: const Color(0xff1A1A1A),
+            textTheme: const TextTheme(
+              headline1: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800,
+                  color: Color(0xff1A1A1A)),
+              bodyText1: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xff1A1A1A)),
+              // bodyText1:const  TextStyle(),
+            )),
+      ),
     );
   }
 }
-
-// class MyHomePage extends StatefulWidget {
-//   const MyHomePage({super.key});
-
-//   @override
-//   State<MyHomePage> createState() => _MyHomePageState();
-// }
-
-// class _MyHomePageState extends State<MyHomePage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       body: ScreenTypeLayout(
-//         breakpoints:
-//             const ScreenBreakpoints(tablet: 757, desktop: 1193, watch: 0),
-//         desktop: const Desktop(),
-//         tablet: const Tablet(),
-//         mobile: const Mobile(),
-//       ),
-//     );
-//   }
-// }
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
@@ -69,9 +68,6 @@ class MyHomePage extends StatelessWidget {
 }
 
 class Desktop extends StatefulWidget {
-  // static double? maxHeight;
-  // static  double? maxWidth;
-
   const Desktop({super.key});
 
   @override
@@ -103,80 +99,79 @@ class Ratio {
 class _DesktopState extends State<Desktop> {
   @override
   Widget build(BuildContext context) {
+    final tabPage = TabPage.of(context);
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
     Ratio size = Ratio(maxHeight: maxHeight, maxWidth: maxWidth);
     return Scaffold(
-      body: Column(
-          // crossAxisAlignment: CrossAxisAl
-          children: <Widget>[
-            Expanded(
-              child: SizedBox(
-                width: size.box * 10,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        color: Colors.brown,
-                        child: Row(
-                          children: [
-                            Text(
-                              maxHeight.toString(),
-                              style: const TextStyle(fontSize: 28),
-                            ),
-                            SizedBox(
-                              width: 20,
-                              height: 10,
-                              child: Container(),
-                            ),
-                            Text(
-                              maxWidth.toString(),
-                              style: const TextStyle(fontSize: 28),
-                            )
-                          ],
-                        ),
+      body: Column(children: <Widget>[
+        Expanded(
+          child: SizedBox(
+            width: size.box * 10,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Text(
+                        'Color Shader',
+                        style: Theme.of(context).textTheme.headline1,
                       ),
-                      SizedBox(
-                        height: size.margin,
-                        child: Container(),
-                      ),
-                      Container(
-                        height: 28,
-                        color: Colors.amber,
-                      ),
-                      SizedBox(
-                        height: size.margin * 2,
-                        child: Container(),
-                      ),
-                      Container(
-                        height: size.box,
-                        width: size.box * 10,
-                        color: Colors.amber,
-                      ),
-                      SizedBox(
-                        height: size.margin,
-                        child: Container(),
-                      ),
-                      Container(
-                        height: size.box * 3,
-                        color: Colors.amber,
-                        child: AspectRatio(
-                          aspectRatio: 1.5/1,
-                          child: Container(
-                            color: Colors.blue,
-                          ),
-                        ),
-                      )
-                    ]),
-              ),
-            ),
-            Container(
-              color: Colors.grey,
-              height: size.footer,
-              // width: double.infinity,
-            )
-          ]),
+                    ],
+                  ),
+                  SizedBox(
+                    height: size.margin,
+                    child: Container(),
+                  ),
+                  SizedBox(
+                    width: size.box * 8,
+                    child: TabBar(
+                      controller: tabPage.controller,
+                      labelPadding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      labelStyle: Theme.of(context).textTheme.bodyText1,
+                      labelColor: Theme.of(context).primaryColorDark,
+                      indicatorColor: Theme.of(context).primaryColorDark,
+                      overlayColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                      tabs: const <Tab>[
+                        Tab(text: 'palette'),
+                        Tab(text: 'lightPalette'),
+                        Tab(text: 'darkPalette'),
+                        Tab(text: 'lightness'),
+                        Tab(text: 'darkness'),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.margin * 3,
+                    child: Container(),
+                  ),
+                  Container(
+                    height: size.box,
+                    width: size.box * 10,
+                    child: TabBarView(
+                      controller: tabPage.controller,
+                      children: [
+                        for (final stack in tabPage.stacks)
+                          PageStackNavigator(stack: stack)
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.margin,
+                    child: Container(),
+                  ),
+                  const FirstState()
+                ]),
+          ),
+        ),
+        Container(
+          color: Colors.grey,
+          height: size.footer,
+          // width: double.infinity,
+        )
+      ]),
     );
   }
 }
@@ -206,5 +201,71 @@ class _MobileState extends State<Mobile> {
   @override
   Widget build(BuildContext context) {
     return Container(color: Colors.brown);
+  }
+}
+
+class FirstState extends StatefulWidget {
+  const FirstState({super.key});
+
+  @override
+  State<FirstState> createState() => _FirstStateState();
+}
+
+class _FirstStateState extends State<FirstState> {
+  TextEditingController controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+        double maxHeight = MediaQuery.of(context).size.height;
+    double maxWidth = MediaQuery.of(context).size.width;
+    Ratio size = Ratio(maxHeight: maxHeight, maxWidth: maxWidth);
+    return Container(
+      color: Colors.amber,
+      child: Consumer(
+        builder: (context, ValuesProvider provider, Widget? child) {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: size.box * 2),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      height: 56,
+                      child: TextField(
+                        controller: controller,
+                        style: Theme.of(context).textTheme.bodyText1,
+                        textAlign: TextAlign.center,
+                        maxLength: 6,
+                        
+                        // minLines: 1,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: Checkbox(
+                              value: provider.fullScale,
+                              onChanged: ((value) =>
+                                  provider.setFullScale(!provider.fullScale))),
+                        ),
+                        Text(
+                          "FullScale",
+                          style: Theme.of(context).textTheme.bodyText1,
+                        )
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
+          );
+        },
+      ),
+    );
   }
 }
