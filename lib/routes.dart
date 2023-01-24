@@ -1,11 +1,8 @@
-import 'dart:js';
 
-import 'package:color_shader_web/providers/state.dart';
 import 'package:flutter/material.dart';
-import 'package:color_shader_web/main.dart';
+import 'package:color_shader_website/main.dart';
 import 'package:routemaster/routemaster.dart';
 
-// var stateProvider = Provider.of<StateProvider>(listen: false);
 
 final routes = RouteMap(routes: {
   '/': (route) => const TabPage(

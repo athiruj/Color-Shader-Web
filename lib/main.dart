@@ -1,7 +1,6 @@
-import 'package:color_shader_web/providers/state.dart';
-import 'package:color_shader_web/providers/value.dart';
+import 'package:color_shader_website/providers/value.dart';
 import 'package:flutter/material.dart';
-import 'package:color_shader_web/routes.dart';
+import '/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
