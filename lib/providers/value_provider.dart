@@ -2,13 +2,13 @@ import 'package:flutter/foundation.dart';
 
 class ValuesProvider with ChangeNotifier {
   String value = 'ff0000';
-  int shades = 10;
+  double shades = 10;
   int index = 5;
   bool fullScale = false;
 
   double scale = 1.0;
   String getValue() => value;
-  int getShades() => shades;
+  double getShades() => shades;
   int getIndex() => index;
   bool getFullScale() => fullScale;
   double getScale() => scale;
@@ -19,7 +19,7 @@ class ValuesProvider with ChangeNotifier {
     print(value);
   }
 
-  void setShades(int newShades) {
+  void setShades(double newShades) {
     shades = newShades;
     notifyListeners();
   }

@@ -1,9 +1,11 @@
-import 'package:color_shader_website/providers/value.dart';
+import 'package:color_shader_website/providers/value_provider.dart';
+import 'package:color_shader_website/theme.dart';
+import 'package:color_shader_website/widgets/slider_box.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 // import 'package:responsive_builder/responsive_builder.dart';
 import 'package:routemaster/routemaster.dart';
@@ -28,19 +30,17 @@ class MyApp extends StatelessWidget {
         routeInformationParser: const RoutemasterParser(),
         title: 'Color Shader',
         theme: ThemeData(
-            fontFamily: GoogleFonts.openSans().fontFamily,
-            primaryColorDark: const Color(0xff1A1A1A),
-            textTheme: const TextTheme(
-              headline1: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w800,
-                  color: Color(0xff1A1A1A)),
-              bodyText1: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xff1A1A1A)),
-              // bodyText1:const  TextStyle(),
-            )),
+          // activeColor: Colors.amber,
+          fontFamily: GoogleFonts.openSans().fontFamily,
+          primaryColorDark: const Color(0xff1A1A1A),
+          textTheme: ThisTextTheme(),
+          sliderTheme: const SliderThemeData(activeTrackColor: Colors.red),
+          checkboxTheme: const CheckboxThemeData(
+              shape: CircleBorder(),
+              splashRadius: 8,
+              side: BorderSide(color: Color(0xFFE6E6E6), width: 2)),
+          unselectedWidgetColor: const Color(0xFFB6B6B6),
+        ),
       ),
     );
   }
@@ -89,6 +89,7 @@ class Ratio {
 
   double get tablet => heightRatio * 1040;
   double get header => heightRatio * 44;
+  double get contr => widthRatio * 640;
   double get box => heightRatio * 112.8;
   double get footer => heightRatio * 54;
 
@@ -96,6 +97,8 @@ class Ratio {
 }
 
 class _DesktopState extends State<Desktop> {
+  TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final tabPage = TabPage.of(context);
@@ -109,13 +112,13 @@ class _DesktopState extends State<Desktop> {
             width: size.box * 10,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Row(
                     children: [
                       Text(
                         'Color Shader',
-                        style: Theme.of(context).textTheme.headline1,
+                        style: Theme.of(context).textTheme.headlineLarge,
                       ),
                     ],
                   ),
@@ -123,31 +126,52 @@ class _DesktopState extends State<Desktop> {
                     height: size.margin,
                     child: Container(),
                   ),
-                  SizedBox(
-                    width: size.box * 8,
-                    child: TabBar(
-                      controller: tabPage.controller,
-                      labelPadding: const EdgeInsets.symmetric(horizontal: 5.0),
-                      labelStyle: Theme.of(context).textTheme.bodyText1,
-                      labelColor: Theme.of(context).primaryColorDark,
-                      indicatorColor: Theme.of(context).primaryColorDark,
-                      overlayColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                      tabs: const <Tab>[
-                        Tab(text: 'palette'),
-                        Tab(text: 'lightPalette'),
-                        Tab(text: 'darkPalette'),
-                        Tab(text: 'lightness'),
-                        Tab(text: 'darkness'),
-                      ],
-                    ),
+                  Row(
+                    // mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 1000,
+                        child: TabBar(
+                          controller: tabPage.controller,
+                          labelPadding:
+                              const EdgeInsets.symmetric(horizontal: 5.0),
+                          labelStyle: Theme.of(context).textTheme.headlineSmall,
+                          labelColor: Theme.of(context).primaryColorDark,
+                          indicatorColor: Theme.of(context).primaryColorDark,
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                          tabs: const <Padding>[
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Tab(text: 'palette'),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Tab(text: 'lightPalette'),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Tab(text: 'darkPalette'),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Tab(text: 'lightness'),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Tab(text: 'darkness'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(
-                    height: size.margin * 3,
+                    height: size.margin * 2,
                     child: Container(),
                   ),
                   Container(
-                    height: size.box,
+                    height: size.box + 20,
                     width: size.box * 10,
                     child: TabBarView(
                       controller: tabPage.controller,
@@ -161,7 +185,121 @@ class _DesktopState extends State<Desktop> {
                     height: size.margin,
                     child: Container(),
                   ),
-                  const FirstState()
+                  SizedBox(
+                    width: size.contr,
+                    child: Column(
+                      children: [
+                        Consumer(builder:
+                            (context, ValuesProvider provider, Widget? child) {
+                          return Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 140,
+                                height: 56,
+                                child: TextFormField(
+                                  controller: controller,
+                                  autofocus: true,
+                                  textCapitalization: TextCapitalization.words,
+                                  obscureText: false,
+                                  maxLength: 6,
+                                  maxLengthEnforcement:
+                                      MaxLengthEnforcement.enforced,
+                                  decoration: InputDecoration(
+                                    counter: const SizedBox(),
+                                    hintText: '000000',
+                                    hintStyle:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                    enabledBorder: const UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.black,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                    focusedBorder: const UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.black,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                    errorBorder: const UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                    focusedErrorBorder:
+                                        const UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                  ),
+                                  style: Theme.of(context).textTheme.bodyText1,
+                                  textAlign: TextAlign.center,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp('[0123456789abcdefABCDEF]'))
+                                  ],
+                                  onChanged: ((value) {
+                                    provider.value = value.toUpperCase();
+                                    controller.text = value.toUpperCase();
+                                    controller.selection =
+                                        TextSelection.collapsed(
+                                            offset: controller.text.length);
+                                  }),
+                                ),
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 12.0),
+                                    child: Transform.scale(
+                                      scale: 1.35,
+                                      child: Checkbox(
+                                        value: provider.fullScale,
+                                        onChanged: (_) async {
+                                          setState(() => provider.fullScale =
+                                              !provider.fullScale);
+                                        },
+                                        activeColor:
+                                            Theme.of(context).primaryColor,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    'FullScale',
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        }),
+                        FirstState(),
+                      ],
+                    ),
+                  )
                 ]),
           ),
         ),
@@ -211,60 +349,32 @@ class FirstState extends StatefulWidget {
 }
 
 class _FirstStateState extends State<FirstState> {
-  TextEditingController controller = TextEditingController();
-
+    double value = 5;
   @override
   Widget build(BuildContext context) {
-        double maxHeight = MediaQuery.of(context).size.height;
+    double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
     Ratio size = Ratio(maxHeight: maxHeight, maxWidth: maxWidth);
-    return Container(
-      color: Colors.amber,
-      child: Consumer(
-        builder: (context, ValuesProvider provider, Widget? child) {
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: size.box * 2),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: 100,
-                      height: 56,
-                      child: TextField(
-                        controller: controller,
-                        style: Theme.of(context).textTheme.bodyText1,
-                        textAlign: TextAlign.center,
-                        maxLength: 6,
-                        
-                        // minLines: 1,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: Checkbox(
-                              value: provider.fullScale,
-                              onChanged: ((value) =>
-                                  provider.setFullScale(!provider.fullScale))),
-                        ),
-                        Text(
-                          "FullScale",
-                          style: Theme.of(context).textTheme.bodyText1,
-                        )
-                      ],
-                    )
-                  ],
-                )
-              ],
-            ),
-          );
-        },
-      ),
+    return Consumer(
+      builder: (context, ValuesProvider provider, Widget? child) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SliderBox(
+                title: 'Shader',
+                subTitle: " subtitle",
+                value: provider.shades,
+                max: 25,
+                min: 0,
+                divisions: 25,
+                onChanged: (newValue) async {
+                  setState(() => provider.shades = newValue);
+                }),
+            
+          ],
+        );
+      },
     );
   }
 }
