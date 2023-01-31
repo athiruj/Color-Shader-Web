@@ -1,4 +1,7 @@
 
+import 'package:color_shader_website/widgets/dark_palette.dart';
+import 'package:color_shader_website/widgets/light_palette.dart';
+import 'package:color_shader_website/widgets/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:color_shader_website/main.dart';
 import 'package:routemaster/routemaster.dart';
@@ -15,18 +18,12 @@ final routes = RouteMap(routes: {
           '/darkness'
         ],
       ),
-  '/palette': (route) => MaterialPage(
-          child: Container(
-        color: Colors.blue,
-      )),
-  '/lightPalette': (route) => MaterialPage(
-          child: Container(
-        color: Colors.green,
-      )),
-  '/darkPalette': (route) => MaterialPage(
-          child: Container(
-        color: Colors.blue,
-      )),
+  '/palette': (route) => const MaterialPage(
+          child: Palette()),
+  '/lightPalette': (route) => const MaterialPage(
+          child: LightPalette()),
+  '/darkPalette': (route) => const MaterialPage(
+          child: DarkPalette()),
   '/lightness': (route) => MaterialPage(
           child: Container(
         color: Colors.green,

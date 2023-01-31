@@ -15,6 +15,8 @@ class SliderBox extends StatefulWidget {
     this.onChangeEnd,
     this.min = 0.0,
     this.max = 1.0,
+    this.minLabel,
+    this.maxLabel,
     this.divisions,
     this.label,
     this.activeColor,
@@ -40,6 +42,8 @@ class SliderBox extends StatefulWidget {
   final ValueChanged<double>? onChangeEnd;
   final double max;
   final double min;
+  final String? maxLabel;
+  final String? minLabel;
   final int? divisions;
   final String? label;
   final Color? activeColor;
@@ -70,7 +74,6 @@ class _SliderBoxState extends State<SliderBox> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 RichText(
-                  
                     text: TextSpan(
                         text: widget.title,
                         style: widget.titleStyle ??
@@ -82,29 +85,30 @@ class _SliderBoxState extends State<SliderBox> {
                               Theme.of(context).textTheme.bodyLarge)
                     ]))
               ]),
+              Slider(
+                
+                activeColor: widget.activeColor,
+                inactiveColor: widget.inactiveColor,
+                min: widget.min,
+                max: widget.max,
+                value: widget.value,
+                label: widget.value.round().toString(),
+                divisions: widget.divisions,
+                onChanged: widget.onChanged,
+                onChangeStart: widget.onChangeStart,
+                onChangeEnd: widget.onChangeEnd,
+              ),
           Row(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                widget.min.toString(),
+                widget.minLabel ?? widget.min.round().toString(),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              Expanded(
-                child: Slider(
-                  activeColor: widget.activeColor,
-                  inactiveColor: widget.inactiveColor,
-                  min: widget.min,
-                  max: widget.max,
-                  value: widget.value,
-                  label: widget.value.round().toString(),
-                  divisions: widget.divisions,
-                  onChanged: widget.onChanged,
-                  onChangeStart: widget.onChangeStart,
-                  onChangeEnd: widget.onChangeEnd,
-                ),
-              ),
+              
               Text(
-                widget.max.toString(),
+                widget.maxLabel ?? widget.max.round().toString(),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
