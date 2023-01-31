@@ -1,62 +1,61 @@
 import 'package:color_shader/color_shader.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 class ValuesProvider with ChangeNotifier {
-  String value = 'ff0000';
+  static const defaultValue = "FF0000";
+  String value = "FF0000";
   int shades = 10;
   int index = 5;
   bool fullScale = false;
-
   double scale = 100;
-  String getValue() => value;
-  int getShades() => shades;
-  int getIndex() => index;
-  double getScale() => scale;
+  // String getValue() => value;
+  // int getShades() => shades;
+  // int getIndex() => index;
+  // double getScale() => scale;
 
   void setValue(String newValue) {
+
     value = newValue;
-    notifyListeners();
     palette;
     lightPalette;
     darkPalette;
-    // print(value);
+    notifyListeners();
   }
 
   void setShades(int newShades) {
     shades = newShades;
-    notifyListeners();
+    index = newShades <= index ? (index/2).floor() : index;
     palette;
     lightPalette;
     darkPalette;
+    notifyListeners();
   }
 
   void setIndex(int newIndex) {
     index = newIndex;
-    notifyListeners();
     palette;
     lightPalette;
     darkPalette;
+    notifyListeners();
   }
 
   void setFullScale(bool newFullScale) {
     fullScale = newFullScale;
-    notifyListeners();
-    print(fullScale);
     palette;
     lightPalette;
     darkPalette;
+    notifyListeners();
   }
 
   void setScale(double newScale) {
     scale = newScale;
-    notifyListeners();
     palette;
     lightPalette;
     darkPalette;
+    notifyListeners();
   }
 
-  List<Color> palette(){
+  List palette(){
   return (
     Shader(int.parse('0xff$value'),
               shades: shades,
@@ -65,7 +64,7 @@ class ValuesProvider with ChangeNotifier {
           .palette(scale: scale / 100)
           
   );}
-  List<Color> lightPalette(){
+  List lightPalette(){
   return (
     Shader(int.parse('0xff$value'),
               shades: shades,
@@ -74,7 +73,7 @@ class ValuesProvider with ChangeNotifier {
           .lightPalette(scale: scale / 100)
           
   );}
-  List<Color> darkPalette(){
+  List darkPalette(){
   return (
     Shader(int.parse('0xff$value'),
               shades: shades,

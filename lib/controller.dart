@@ -1,8 +1,8 @@
+import 'package:color_shader_website/widgets/slider_box.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/value_provider.dart';
-import 'widgets/slider_box.dart';
 
 class Controller extends StatefulWidget {
   const Controller({super.key});

@@ -56,7 +56,7 @@ class ThisTextTheme extends TextTheme {
       );
       
         
-  static const Color color = Color(0xff1A1A1A);
+  static const Color color = Color.fromARGB(255, 42, 42, 42);
   static const Color subColor = Color(0xffB6B6B6);
   static final String? fontFamily = GoogleFonts.openSans().fontFamily;
   final Color? headlineLargeColor;

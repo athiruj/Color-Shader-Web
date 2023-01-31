@@ -28,17 +28,22 @@ class MyApp extends StatelessWidget {
         routeInformationParser: const RoutemasterParser(),
         title: 'Color Shader',
         theme: ThemeData(
-          // activeColor: Colors.amber,
           fontFamily: ThisTextTheme.fontFamily,
           primaryColorDark: ThisTextTheme.color,
-          shadowColor: ThisTextTheme.subColor,
+          disabledColor: ThisTextTheme.subColor,
           textTheme: ThisTextTheme(),
           sliderTheme: const SliderThemeData(activeTrackColor: Colors.red),
-          checkboxTheme: const CheckboxThemeData(
-              shape: CircleBorder(),
-              splashRadius: 8,
-              side: BorderSide(color: Color(0xFFE6E6E6), width: 2)),
-          unselectedWidgetColor: const Color(0xFFB6B6B6),
+          
+          checkboxTheme:  CheckboxThemeData(
+            // activeColor: ThisTextTheme.color,
+              shape: const  CircleBorder(),
+              splashRadius: 10,
+              fillColor: MaterialStateProperty.all(ThisTextTheme.color),
+              checkColor: MaterialStateProperty.all(Colors.white),
+
+              side: const BorderSide(color: ThisTextTheme.subColor, width: 2)),
+
+          unselectedWidgetColor: ThisTextTheme.subColor,
           tabBarTheme: TabBarTheme(
             indicator: const UnderlineTabIndicator(
                 borderSide: BorderSide(color: ThisTextTheme.color, width: 2)),

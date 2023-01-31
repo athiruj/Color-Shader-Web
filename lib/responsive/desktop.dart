@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -15,8 +16,8 @@ class Desktop extends StatefulWidget {
 }
 
 class _DesktopState extends State<Desktop> {
-  TextEditingController controller = TextEditingController();
-
+  TextEditingController controller =
+      TextEditingController(text: ValuesProvider.defaultValue);
   @override
   Widget build(BuildContext context) {
     final tabPage = TabPage.of(context);
@@ -104,63 +105,66 @@ class _DesktopState extends State<Desktop> {
                                       MaxLengthEnforcement.enforced,
                                   decoration: InputDecoration(
                                     counter: const SizedBox(),
+
                                     hintText: '000000',
                                     hintStyle:
                                         Theme.of(context).textTheme.bodyLarge,
-                                    enabledBorder: const UnderlineInputBorder(
+                                    enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Colors.black,
-                                        width: 1,
+                                        color: Theme.of(context).disabledColor,
+                                        width: 2,
                                       ),
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
+                                      // borderRadius: BorderRadius.only(
+                                      //   topLeft: Radius.circular(4.0),
+                                      //   topRight: Radius.circular(4.0),
+                                      // ),
                                     ),
-                                    focusedBorder: const UnderlineInputBorder(
+                                    focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Colors.black,
-                                        width: 1,
+                                        color:
+                                            Theme.of(context).primaryColorDark,
+                                        width: 2,
                                       ),
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
+                                      // borderRadius: BorderRadius.only(
+                                      //   topLeft: Radius.circular(4.0),
+                                      //   topRight: Radius.circular(4.0),
+                                      // ),
                                     ),
                                     errorBorder: const UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0x00000000),
-                                        width: 1,
+                                        color: Color(0xffff0000),
+                                        width: 2,
                                       ),
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
+                                      // borderRadius: BorderRadius.only(
+                                      //   topLeft: Radius.circular(4.0),
+                                      //   topRight: Radius.circular(4.0),
+                                      // ),
                                     ),
-                                    focusedErrorBorder:
-                                        const UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0x00000000),
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(4.0),
-                                        topRight: Radius.circular(4.0),
-                                      ),
-                                    ),
+                                    // focusedErrorBorder:
+                                    //     const UnderlineInputBorder(
+                                    //   borderSide: BorderSide(
+                                    //     color: Color(0x00000000),
+                                    //     width: 1,
+                                    //   ),
+                                    //   borderRadius: BorderRadius.only(
+                                    //     topLeft: Radius.circular(4.0),
+                                    //     topRight: Radius.circular(4.0),
+                                    //   ),
+                                    // ),
                                   ),
-                                  style: Theme.of(context).textTheme.bodyText1,
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
                                   textAlign: TextAlign.center,
                                   inputFormatters: [
                                     FilteringTextInputFormatter.allow(
                                         RegExp('[0123456789abcdefABCDEF]'))
                                   ],
                                   onChanged: ((value) {
-                                    provider.value = value.toUpperCase();
-                                    controller.text = value.toUpperCase();
+                                    controller.text == '' ? null : provider.setValue(value.toUpperCase());
+                                    controller.text = controller.text == '' ? '' : provider.value;
                                     controller.selection =
                                         TextSelection.collapsed(
-                                            offset: controller.text.length);
+                                            offset: provider.value.length);
                                   }),
                                 ),
                               ),
@@ -170,15 +174,15 @@ class _DesktopState extends State<Desktop> {
                                   Padding(
                                     padding: const EdgeInsets.only(right: 12.0),
                                     child: Transform.scale(
-                                      scale: 1.35,
+                                      scale: 1.3,
                                       child: Checkbox(
                                         value: provider.fullScale,
                                         onChanged: (_) async {
                                           setState(() => provider.setFullScale(
                                               !provider.fullScale));
                                         },
-                                        activeColor:
-                                            Theme.of(context).primaryColor,
+                                        // activeColor:
+                                        // Theme.of(context).primaryColor,
                                       ),
                                     ),
                                   ),
@@ -200,7 +204,7 @@ class _DesktopState extends State<Desktop> {
           ),
         ),
         Container(
-          color: Colors.grey,
+          color: Theme.of(context).primaryColorDark,
           height: size.footer,
           // width: double.infinity,
         )
