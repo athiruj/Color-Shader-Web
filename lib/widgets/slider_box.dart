@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SliderBox extends StatefulWidget {
+class SliderBox extends StatelessWidget {
   const SliderBox({
     super.key,
     this.width,
@@ -57,16 +57,11 @@ class SliderBox extends StatefulWidget {
   final bool autofocus;
 
   @override
-  State<SliderBox> createState() => _SliderBoxState();
-}
-
-class _SliderBoxState extends State<SliderBox> {
-  @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: widget.width ?? 640.0,
+      width: width ?? 540.0,
       child: Column(
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
@@ -75,40 +70,40 @@ class _SliderBoxState extends State<SliderBox> {
               children: [
                 RichText(
                     text: TextSpan(
-                        text: widget.title,
-                        style: widget.titleStyle ??
+                        text: title,
+                        style: titleStyle ??
                             Theme.of(context).textTheme.titleMedium,
                         children: [
                       TextSpan(
-                          text: widget.subTitle,
-                          style: widget.subTitleStyle ??
+                          text: subTitle,
+                          style: subTitleStyle ??
                               Theme.of(context).textTheme.bodyLarge)
                     ]))
               ]),
               Slider(
                 
-                activeColor: widget.activeColor,
-                inactiveColor: widget.inactiveColor,
-                min: widget.min,
-                max: widget.max,
-                value: widget.value,
-                label: widget.value.round().toString(),
-                divisions: widget.divisions,
-                onChanged: widget.onChanged,
-                onChangeStart: widget.onChangeStart,
-                onChangeEnd: widget.onChangeEnd,
+                activeColor: activeColor,
+                inactiveColor: inactiveColor,
+                min: min,
+                max: max,
+                value: value,
+                label: value.round().toString(),
+                divisions: divisions,
+                onChanged: onChanged,
+                onChangeStart: onChangeStart,
+                onChangeEnd: onChangeEnd,
               ),
           Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                widget.minLabel ?? widget.min.round().toString(),
+                minLabel ?? min.round().toString(),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               
               Text(
-                widget.maxLabel ?? widget.max.round().toString(),
+                maxLabel ?? max.round().toString(),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],

@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+class ThisTheme {
+  const ThisTheme(_);
+        
+  static const Color color = Color.fromARGB(255, 42, 42, 42);
+  static const Color subColor = Color(0xffB6B6B6);
+  static final String? fontFamily = GoogleFonts.openSans().fontFamily;
+  
+  static final TextTheme textTheme  = ThisTextTheme();
+}
 class ThisTextTheme extends TextTheme {
   ThisTextTheme(
       {
@@ -56,9 +65,8 @@ class ThisTextTheme extends TextTheme {
       );
       
         
-  static const Color color = Color.fromARGB(255, 42, 42, 42);
-  static const Color subColor = Color(0xffB6B6B6);
-  static final String? fontFamily = GoogleFonts.openSans().fontFamily;
+  static Color color = const Color.fromARGB(255, 42, 42, 42);
+  static Color subColor = const Color(0xffB6B6B6);
   final Color? headlineLargeColor;
   final Color? headlineSmall2Color;
   final Color? headlineSmall3Color;

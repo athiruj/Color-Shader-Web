@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
-import '/theme/TextTheme.dart';
+import 'theme/ThisTheme.dart';
 
 import '/routes.dart';
 import 'providers/value_provider.dart';
-import 'models/ratio_scale.dart';
 import 'responsive/desktop.dart';
 import 'responsive/tablet.dart';
 
@@ -28,30 +27,31 @@ class MyApp extends StatelessWidget {
         routeInformationParser: const RoutemasterParser(),
         title: 'Color Shader',
         theme: ThemeData(
-          fontFamily: ThisTextTheme.fontFamily,
-          primaryColorDark: ThisTextTheme.color,
-          disabledColor: ThisTextTheme.subColor,
-          textTheme: ThisTextTheme(),
-          sliderTheme: const SliderThemeData(activeTrackColor: Colors.red),
+          fontFamily: ThisTheme.fontFamily,
+          primaryColorDark: ThisTheme.color,
+          disabledColor: ThisTheme.subColor,
+          textTheme: ThisTheme.textTheme,
+          sliderTheme: const SliderThemeData(
+            activeTrackColor: ThisTheme.color),
           
           checkboxTheme:  CheckboxThemeData(
-            // activeColor: ThisTextTheme.color,
+            // activeColor: ThisTheme.color,
               shape: const  CircleBorder(),
               splashRadius: 10,
-              fillColor: MaterialStateProperty.all(ThisTextTheme.color),
+              fillColor: MaterialStateProperty.all(ThisTheme.color),
               checkColor: MaterialStateProperty.all(Colors.white),
 
-              side: const BorderSide(color: ThisTextTheme.subColor, width: 2)),
+              side:const BorderSide(color: ThisTheme.subColor, width: 2)),
 
-          unselectedWidgetColor: ThisTextTheme.subColor,
+          unselectedWidgetColor: ThisTheme.subColor,
           tabBarTheme: TabBarTheme(
             indicator: const UnderlineTabIndicator(
-                borderSide: BorderSide(color: ThisTextTheme.color, width: 2)),
+                borderSide: BorderSide(color: ThisTheme.color, width: 2)),
             indicatorSize: TabBarIndicatorSize.label,
-            labelStyle: ThisTextTheme().headlineMedium,
-            labelColor: ThisTextTheme.color,
-            unselectedLabelStyle: ThisTextTheme().headlineSmall,
-            unselectedLabelColor: ThisTextTheme.subColor,
+            labelStyle: ThisTheme.textTheme.headlineMedium,
+            labelColor: ThisTheme.color,
+            unselectedLabelStyle: ThisTheme.textTheme.headlineSmall,
+            unselectedLabelColor: ThisTheme.subColor,
             // overlayColor:
           ),
         ),
@@ -66,12 +66,12 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = WidgetsBinding.instance.window.physicalSize;
-    double width = screenSize.width;
-    double height = screenSize.height;
-    Ratio size = Ratio(maxHeight: height, maxWidth: width);
+    // double width = screenSize.width;
+    // double height = screenSize.height;
+    // Ratio size = Ratio(maxHeight: height, maxWidth: width);
     return LayoutBuilder(
       builder: ((BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth > size.tablet) {
+        if (constraints.maxWidth > 740) {
           return const Desktop();
         }
         return const Tablet();
