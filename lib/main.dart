@@ -8,7 +8,6 @@ import 'providers/value_provider.dart';
 import 'responsive/desktop.dart';
 import 'responsive/tablet.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -32,20 +31,18 @@ class MyApp extends StatelessWidget {
           disabledColor: ThisTheme.supColor,
           textTheme: ThisTheme.textTheme,
           sliderTheme: ThisTheme.sliderTheme,
-          
-          checkboxTheme:  CheckboxThemeData(
-            // activeColor: ThisTheme.color,
-              shape: const  CircleBorder(),
+          checkboxTheme: CheckboxThemeData(
+              // activeColor: ThisTheme.color,
+              shape: const CircleBorder(),
               splashRadius: 10,
               fillColor: MaterialStateProperty.all(ThisTheme.primaryColor),
               checkColor: MaterialStateProperty.all(Colors.white),
-
-              side:const BorderSide(color: ThisTheme.supColor, width: 2)),
-
+              side: const BorderSide(color: ThisTheme.supColor, width: 2)),
           unselectedWidgetColor: ThisTheme.supColor,
           tabBarTheme: TabBarTheme(
             indicator: const UnderlineTabIndicator(
-                borderSide: BorderSide(color: ThisTheme.primaryColor, width: 2)),
+                borderSide:
+                    BorderSide(color: ThisTheme.primaryColor, width: 2)),
             indicatorSize: TabBarIndicatorSize.label,
             labelStyle: ThisTheme.textTheme.headlineMedium,
             labelColor: ThisTheme.primaryColor,
@@ -79,9 +76,6 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-
-
-
 // class Mobile extends StatefulWidget {
 //   const Mobile({super.key});
 
@@ -95,4 +89,3 @@ class MyHomePage extends StatelessWidget {
 //     return Container(color: Colors.brown);
 //   }
 // }
-

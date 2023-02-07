@@ -74,14 +74,15 @@ class _DesktopState extends State<Desktop> {
               Text('Title Medium',
                   style: Theme.of(context).textTheme.titleMedium),
               Text('Body Large', style: Theme.of(context).textTheme.bodyLarge),
-              Text('Body Medium', style: Theme.of(context).textTheme.bodyMedium),
+              Text('Body Medium',
+                  style: Theme.of(context).textTheme.bodyMedium),
               Text('Label Large',
                   style: Theme.of(context).textTheme.labelLarge),
               Text('Label Small',
                   style: Theme.of(context).textTheme.labelSmall),
               SliderBox(
                   title: 'Shader',
-                  subTitle:'   number of shades in palette',
+                  subTitle: '   number of shades in palette',
                   max: 10,
                   min: 0,
                   divisions: 10,
@@ -91,7 +92,6 @@ class _DesktopState extends State<Desktop> {
                       value = v;
                     });
                   }),
-             
             ],
           ),
         ),

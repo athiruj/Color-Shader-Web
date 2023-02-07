@@ -1,13 +1,16 @@
-
-
 class ShadeValue {
- String value;
+  String value;
 
- int shades;
- int index;
- bool fullScale;
+  int shades;
+  int index;
+  bool fullScale;
 
- double scale;
+  double scale;
 
- ShadeValue({required this.value,required this.shades,required this.index,required this.fullScale,required this.scale});
-} 
+  ShadeValue(
+      {required this.value,
+      required this.shades,
+      required this.index,
+      required this.fullScale,
+      required this.scale});
+}

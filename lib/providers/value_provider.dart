@@ -14,7 +14,6 @@ class ValuesProvider with ChangeNotifier {
   // double getScale() => scale;
 
   void setValue(String newValue) {
-
     value = newValue;
     palette;
     lightPalette;
@@ -24,7 +23,7 @@ class ValuesProvider with ChangeNotifier {
 
   void setShades(int newShades) {
     shades = newShades;
-    index = newShades <= index ? (index/2).floor() : index;
+    index = newShades <= index ? (index / 2).floor() : index;
     palette;
     lightPalette;
     darkPalette;
@@ -55,31 +54,21 @@ class ValuesProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  List palette(){
-  return (
-    Shader(int.parse('0xff$value'),
-              shades: shades,
-              index: index,
-              fullScale: fullScale)
-          .palette(scale: scale / 100)
-          
-  );}
-  List lightPalette(){
-  return (
-    Shader(int.parse('0xff$value'),
-              shades: shades,
-              index: index,
-              fullScale: fullScale)
-          .lightPalette(scale: scale / 100)
-          
-  );}
-  List darkPalette(){
-  return (
-    Shader(int.parse('0xff$value'),
-              shades: shades,
-              index: index,
-              fullScale: fullScale)
-          .darkPalette(scale: scale / 100)
-          
-  );}
+  List palette() {
+    return (Shader(int.parse('0xff$value'),
+            shades: shades, index: index, fullScale: fullScale)
+        .palette(scale: scale / 100));
+  }
+
+  List lightPalette() {
+    return (Shader(int.parse('0xff$value'),
+            shades: shades, index: index, fullScale: fullScale)
+        .lightPalette(scale: scale / 100));
+  }
+
+  List darkPalette() {
+    return (Shader(int.parse('0xff$value'),
+            shades: shades, index: index, fullScale: fullScale)
+        .darkPalette(scale: scale / 100));
+  }
 }

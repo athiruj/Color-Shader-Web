@@ -20,16 +20,12 @@ class _ControllerState extends State<Controller> {
   @override
   Widget build(BuildContext context) {
     return BackdropFilter(
-      filter: ImageFilter.blur(
-        sigmaX: 0.1,
-        sigmaY: 0.1
-      ),
+      filter: ImageFilter.blur(sigmaX: 0.1, sigmaY: 0.1),
       child: Container(
         width: 540,
         decoration: BoxDecoration(
-        color: Colors.white30,
-          borderRadius: BorderRadius.all(Radius.circular(10.0))
-        ),
+            color: Colors.white30,
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Consumer(
@@ -40,7 +36,7 @@ class _ControllerState extends State<Controller> {
                 // spacing: 20,
                 runSpacing: 20,
                 // crossAxisAlignment: WrapCrossAlignment.start,
-                
+
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,7 +53,7 @@ class _ControllerState extends State<Controller> {
                           maxLengthEnforcement: MaxLengthEnforcement.enforced,
                           decoration: InputDecoration(
                             counter: const SizedBox(),
-    
+
                             hintText: '000000',
                             hintStyle: Theme.of(context).textTheme.bodyLarge,
                             enabledBorder: UnderlineInputBorder(
@@ -119,7 +115,6 @@ class _ControllerState extends State<Controller> {
                           }),
                         ),
                       ),
-                    
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -130,8 +125,8 @@ class _ControllerState extends State<Controller> {
                               child: Checkbox(
                                 value: provider.fullScale,
                                 onChanged: (_) async {
-                                  setState(() =>
-                                      provider.setFullScale(!provider.fullScale));
+                                  setState(() => provider
+                                      .setFullScale(!provider.fullScale));
                                 },
                                 // activeColor:
                                 // Theme.of(context).primaryColor,

@@ -43,7 +43,7 @@ class ThisTheme {
   );
   static SliderThemeData sliderTheme = SliderThemeData(
     trackHeight: 4.0,
-    
+
     overlayColor: primaryColor.withOpacity(0.3),
     overlappingShapeStrokeColor: Colors.white,
     valueIndicatorColor: primaryColor,
@@ -60,8 +60,7 @@ class ThisTheme {
     overlayShape: const RoundSliderOverlayShape(
       overlayRadius: 12.0,
     ),
-    thumbShape:
-        const RoundSliderThumbShape(enabledThumbRadius: 10.0),
+    thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 10.0),
     trackShape: const RoundedRectSliderTrackShape(),
     rangeTrackShape: const RoundedRectRangeSliderTrackShape(),
   );
