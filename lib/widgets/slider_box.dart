@@ -64,24 +64,7 @@ class SliderBox extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                RichText(
-                    text: TextSpan(
-                        text: title,
-                        style: titleStyle ??
-                            Theme.of(context).textTheme.titleMedium,
-                        children: [
-                      TextSpan(
-                          text: subTitle,
-                          style: subTitleStyle ??
-                              Theme.of(context).textTheme.bodyLarge)
-                    ]))
-              ]),
-              Slider(
-                
+              Slider( 
                 activeColor: activeColor,
                 inactiveColor: inactiveColor,
                 min: min,
@@ -94,17 +77,34 @@ class SliderBox extends StatelessWidget {
                 onChangeEnd: onChangeEnd,
               ),
           Row(
-            mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                minLabel ?? min.round().toString(),
-                style: Theme.of(context).textTheme.bodyMedium,
+              SizedBox(
+                width: 40,
+                child: Text(
+                  minLabel ?? min.round().toString(),
+                  style: Theme.of(context).textTheme.labelLarge,
+                  textAlign: TextAlign.start,
+                ),
               ),
-              
-              Text(
-                maxLabel ?? max.round().toString(),
-                style: Theme.of(context).textTheme.bodyMedium,
+               RichText(
+                    text: TextSpan(
+                        text: title,
+                        style: titleStyle ??
+                            Theme.of(context).textTheme.bodyMedium,
+                        children: [
+                      TextSpan(
+                          text: subTitle,
+                          style: subTitleStyle ??
+                              Theme.of(context).textTheme.labelLarge)
+                    ])),
+              SizedBox(
+                width: 40,
+                child: Text(
+                  maxLabel ?? max.round().toString(),
+                  style: Theme.of(context).textTheme.labelLarge,
+                  textAlign: TextAlign.end,
+                ),
               ),
             ],
           ),

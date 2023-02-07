@@ -28,30 +28,29 @@ class MyApp extends StatelessWidget {
         title: 'Color Shader',
         theme: ThemeData(
           fontFamily: ThisTheme.fontFamily,
-          primaryColorDark: ThisTheme.color,
-          disabledColor: ThisTheme.subColor,
+          primaryColorDark: ThisTheme.primaryColor,
+          disabledColor: ThisTheme.supColor,
           textTheme: ThisTheme.textTheme,
-          sliderTheme: const SliderThemeData(
-            activeTrackColor: ThisTheme.color),
+          sliderTheme: ThisTheme.sliderTheme,
           
           checkboxTheme:  CheckboxThemeData(
             // activeColor: ThisTheme.color,
               shape: const  CircleBorder(),
               splashRadius: 10,
-              fillColor: MaterialStateProperty.all(ThisTheme.color),
+              fillColor: MaterialStateProperty.all(ThisTheme.primaryColor),
               checkColor: MaterialStateProperty.all(Colors.white),
 
-              side:const BorderSide(color: ThisTheme.subColor, width: 2)),
+              side:const BorderSide(color: ThisTheme.supColor, width: 2)),
 
-          unselectedWidgetColor: ThisTheme.subColor,
+          unselectedWidgetColor: ThisTheme.supColor,
           tabBarTheme: TabBarTheme(
             indicator: const UnderlineTabIndicator(
-                borderSide: BorderSide(color: ThisTheme.color, width: 2)),
+                borderSide: BorderSide(color: ThisTheme.primaryColor, width: 2)),
             indicatorSize: TabBarIndicatorSize.label,
             labelStyle: ThisTheme.textTheme.headlineMedium,
-            labelColor: ThisTheme.color,
+            labelColor: ThisTheme.primaryColor,
             unselectedLabelStyle: ThisTheme.textTheme.headlineSmall,
-            unselectedLabelColor: ThisTheme.subColor,
+            unselectedLabelColor: ThisTheme.supColor,
             // overlayColor:
           ),
         ),

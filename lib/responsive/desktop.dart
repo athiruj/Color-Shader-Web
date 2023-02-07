@@ -1,3 +1,4 @@
+import 'package:color_shader_website/widgets/slider_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 // import 'package:flutter/services.dart';
@@ -17,8 +18,9 @@ class Desktop extends StatefulWidget {
 
 class _DesktopState extends State<Desktop> {
   final GlobalKey keyBox = GlobalKey();
-  Size size = Size(200,200);
-  Offset position = Offset(10,20);
+  Size size = Size(200, 200);
+  Offset position = Offset(10, 20);
+  double value = 5.0;
 
   @override
   void initState() {
@@ -30,7 +32,6 @@ class _DesktopState extends State<Desktop> {
   void calculateSizeAndPosition() =>
       WidgetsBinding.instance.addPostFrameCallback((_) {
         RenderBox box = keyBox.currentContext?.findRenderObject() as RenderBox;
-        
 
         setState(() {
           position = box.localToGlobal(Offset.zero);
@@ -44,19 +45,57 @@ class _DesktopState extends State<Desktop> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColorDark,
-      body: Stack(
-          children: <Widget>[
-            Row(
-              children: [
-                Expanded(child: Container(color: Colors.red,)),
-                Expanded(child: Container(color: Colors.amber,)),
-              ],
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Controller(key: keyBox,)),
-            TextButton(onPressed: (){calculateSizeAndPosition();}, child: Text('Hello'))
-            ]),
+      body: Stack(children: <Widget>[
+        Row(
+          children: [
+            Expanded(
+                child: Container(
+              color: Colors.white,
+            )),
+            // Expanded(
+            //     child: Container(
+            //   color: Colors.white,
+            // )),
+          ],
+        ),
+        // Align(
+        //     alignment: Alignment.center,
+        //     child: Controller(
+        //       key: keyBox,
+        //     )),
+        Align(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Text('Headline Small',
+              //     style: Theme.of(context).textTheme.headlineSmall),
+              Text('Title Medium',
+                  style: Theme.of(context).textTheme.titleMedium),
+              Text('Body Large', style: Theme.of(context).textTheme.bodyLarge),
+              Text('Body Medium', style: Theme.of(context).textTheme.bodyMedium),
+              Text('Label Large',
+                  style: Theme.of(context).textTheme.labelLarge),
+              Text('Label Small',
+                  style: Theme.of(context).textTheme.labelSmall),
+              SliderBox(
+                  title: 'Shader',
+                  subTitle:'   number of shades in palette',
+                  max: 10,
+                  min: 0,
+                  divisions: 10,
+                  value: value,
+                  onChanged: (v) {
+                    setState(() {
+                      value = v;
+                    });
+                  }),
+             
+            ],
+          ),
+        ),
+      ]),
     );
   }
 }
