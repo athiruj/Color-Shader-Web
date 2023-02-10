@@ -26,30 +26,22 @@ class MyApp extends StatelessWidget {
         routeInformationParser: const RoutemasterParser(),
         title: 'Color Shader',
         theme: ThemeData(
+          colorScheme: ThisTheme.colorScheme,
           fontFamily: ThisTheme.fontFamily,
-          primaryColorDark: ThisTheme.primaryColor,
-          disabledColor: ThisTheme.supColor,
           textTheme: ThisTheme.textTheme,
           sliderTheme: ThisTheme.sliderTheme,
-          checkboxTheme: CheckboxThemeData(
-              // activeColor: ThisTheme.color,
-              shape: const CircleBorder(),
-              splashRadius: 10,
-              fillColor: MaterialStateProperty.all(ThisTheme.primaryColor),
-              checkColor: MaterialStateProperty.all(Colors.white),
-              side: const BorderSide(color: ThisTheme.supColor, width: 2)),
-          unselectedWidgetColor: ThisTheme.supColor,
-          tabBarTheme: TabBarTheme(
-            indicator: const UnderlineTabIndicator(
-                borderSide:
-                    BorderSide(color: ThisTheme.primaryColor, width: 2)),
-            indicatorSize: TabBarIndicatorSize.label,
-            labelStyle: ThisTheme.textTheme.headlineMedium,
-            labelColor: ThisTheme.primaryColor,
-            unselectedLabelStyle: ThisTheme.textTheme.headlineSmall,
-            unselectedLabelColor: ThisTheme.supColor,
-            // overlayColor:
-          ),
+          checkboxTheme: ThisTheme.checkboxThemeData,
+          // tabBarTheme: TabBarTheme(
+          // indicator: const UnderlineTabIndicator(
+          //     borderSide:
+          //         BorderSide(color: ThisTheme.primaryColor, width: 2)),
+          // indicatorSize: TabBarIndicatorSize.label,
+          // labelStyle: ThisTheme.textTheme.headlineMedium,
+          // labelColor: ThisTheme.primaryColor,
+          // unselectedLabelStyle: ThisTheme.textTheme.headlineSmall,
+          // unselectedLabelColor: ThisTheme.supColor,
+          // // overlayColor:
+          // ),
         ),
       ),
     );

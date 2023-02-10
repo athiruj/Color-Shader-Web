@@ -1,13 +1,14 @@
+import 'package:color_shader_website/widgets/check_box.dart';
 import 'package:color_shader_website/widgets/slider_box.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+// import 'package:flutter/rendering.dart';
 // import 'package:flutter/services.dart';
 // import 'package:google_fonts/google_fonts.dart';
 // import 'package:provider/provider.dart';
-import 'package:routemaster/routemaster.dart';
+// import 'package:routemaster/routemaster.dart';
 
-import '../controller.dart';
-import '../providers/value_provider.dart';
+// import '../controller.dart';
+// import '../providers/value_provider.dart';
 
 class Desktop extends StatefulWidget {
   const Desktop({super.key});
@@ -18,8 +19,8 @@ class Desktop extends StatefulWidget {
 
 class _DesktopState extends State<Desktop> {
   final GlobalKey keyBox = GlobalKey();
-  Size size = Size(200, 200);
-  Offset position = Offset(10, 20);
+  Size size = const Size(200, 200);
+  Offset position = const Offset(10, 20);
   double value = 5.0;
 
   @override
@@ -36,8 +37,8 @@ class _DesktopState extends State<Desktop> {
         setState(() {
           position = box.localToGlobal(Offset.zero);
           size = box.size;
-          print(position);
-          print(size);
+          // print(position);
+          // print(size);
         });
       });
 
@@ -52,10 +53,6 @@ class _DesktopState extends State<Desktop> {
                 child: Container(
               color: Colors.white,
             )),
-            // Expanded(
-            //     child: Container(
-            //   color: Colors.white,
-            // )),
           ],
         ),
         // Align(
@@ -68,6 +65,7 @@ class _DesktopState extends State<Desktop> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               // Text('Headline Small',
               //     style: Theme.of(context).textTheme.headlineSmall),
@@ -80,6 +78,12 @@ class _DesktopState extends State<Desktop> {
                   style: Theme.of(context).textTheme.labelLarge),
               Text('Label Small',
                   style: Theme.of(context).textTheme.labelSmall),
+              ThisCheckbox(
+                  value: false,
+                  scale: 1.35,
+                  title: 'FullScale',
+                  subTitle: 'say hello',
+                  onChanged: (c) {}),
               SliderBox(
                   title: 'Shader',
                   subTitle: '   number of shades in palette',
@@ -98,4 +102,12 @@ class _DesktopState extends State<Desktop> {
       ]),
     );
   }
+
+  // Widget coc(BuildContext context){
+  //   return Container(
+  //     width: 50,
+  //     height: 50,
+  //     color: Colors.amber
+  //   );
+  // }
 }

@@ -93,6 +93,7 @@ class SliderBox extends StatelessWidget {
                       style:
                           titleStyle ?? Theme.of(context).textTheme.bodyMedium,
                       children: [
+                    const WidgetSpan(child: SizedBox(width: 10)),
                     TextSpan(
                         text: subTitle,
                         style: subTitleStyle ??

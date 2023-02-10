@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class ThisCheckbox extends StatelessWidget {
   const ThisCheckbox(
       {super.key,
-      this.scale,
+      this.scale = 1,
       required this.title,
       required this.subTitle,
       this.titleStyle,
       this.subTitleStyle,
-      this.value,
+      required this.value,
       this.tristate = false,
       required this.onChanged,
       this.mouseCursor,
@@ -31,7 +31,7 @@ class ThisCheckbox extends StatelessWidget {
   final String subTitle;
   final TextStyle? titleStyle;
   final TextStyle? subTitleStyle;
-  final bool? value;
+  final bool value;
   final bool tristate;
   final void Function(bool?)? onChanged;
   final MouseCursor? mouseCursor;
@@ -51,46 +51,51 @@ class ThisCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 16.0),
-          child: Transform.scale(
-            scale: scale,
-            child: Checkbox(
-              key: key,
-              value: value,
-              tristate: tristate,
-              onChanged: onChanged,
-              mouseCursor: mouseCursor,
-              activeColor: activeColor,
-              fillColor: fillColor,
-              checkColor: checkColor,
-              focusColor: focusColor,
-              hoverColor: hoverColor,
-              overlayColor: overlayColor,
-              splashRadius: splashRadius,
-              materialTapTargetSize: materialTapTargetSize,
-              visualDensity: visualDensity,
-              focusNode: focusNode,
-              autofocus: autofocus,
-              shape: shape,
-              side: side,
+    return SizedBox(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
+        // mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Transform.scale(
+              scale: scale,
+              child: Checkbox(
+                key: key,
+                value: value,
+                tristate: tristate,
+                onChanged: onChanged,
+                mouseCursor: mouseCursor,
+                activeColor: activeColor,
+                fillColor: fillColor,
+                checkColor: checkColor,
+                focusColor: focusColor,
+                hoverColor: hoverColor,
+                overlayColor: overlayColor,
+                splashRadius: splashRadius,
+                materialTapTargetSize: materialTapTargetSize,
+                visualDensity: visualDensity,
+                focusNode: focusNode,
+                autofocus: autofocus,
+                shape: shape,
+                side: side,
+              ),
             ),
           ),
-        ),
-        RichText(
-            text: TextSpan(
-                text: title,
-                style: titleStyle ?? Theme.of(context).textTheme.bodyMedium,
-                children: [
-              TextSpan(
-                  text: subTitle,
-                  style:
-                      subTitleStyle ?? Theme.of(context).textTheme.labelLarge)
-            ])),
-      ],
+          RichText(
+              text: TextSpan(
+                  text: title,
+                  style: titleStyle ?? Theme.of(context).textTheme.bodyMedium,
+                  children: [
+                const WidgetSpan(child: SizedBox(width: 10)),
+                TextSpan(
+                    text: subTitle,
+                    style:
+                        subTitleStyle ?? Theme.of(context).textTheme.labelLarge)
+              ])),
+        ],
+      ),
     );
   }
 }

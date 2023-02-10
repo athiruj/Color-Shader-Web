@@ -4,128 +4,96 @@ import 'package:google_fonts/google_fonts.dart';
 class ThisTheme {
   const ThisTheme(_);
 
-  static const Color primaryColor = Color(0xFF1A1A1A);
-  static const Color secondaryColor = Color(0xFF5A5A5A);
-  static const Color supColor = Color(0xFFF4F4F4);
+  static const Color primary = Color(0xFF1A1A1A);
+  static const Color onPrimary = Colors.white;
+  static const Color primaryContainer = Color(0xFF717171);
+  static const Color onPrimaryContainer = primary;
+  static const Color secondary = primary;
+  static const Color onSecondary = onPrimary;
+  static const Color error = Color(0xFF960000);
+  static const Color onError = Colors.white;
+  static const Color background = Color(0xCCFFFFFF);
+  static const Color onBackground = Color(0xFF000000);
+  static const Color surface = onPrimary;
+  static const Color onSurface = onBackground;
   static final String? fontFamily = GoogleFonts.openSans().fontFamily;
+
+  static const ColorScheme colorScheme = ColorScheme(
+      brightness: Brightness.light,
+      primary: primary,
+      onPrimary: onPrimary,
+      primaryContainer: primaryContainer,
+      onPrimaryContainer: onPrimaryContainer,
+      secondary: secondary,
+      onSecondary: onSecondary,
+      error: error,
+      onError: onError,
+      background: background,
+      onBackground: onBackground,
+      surface: surface,
+      onSurface: onSurface);
 
   static final TextTheme textTheme = TextTheme(
     // headlineSmall: GoogleFonts.lobster(
-    //   color: primaryColor,
+    //   color: primary,
     //   fontSize: 28.0,
     //   fontWeight: FontWeight.w400,
     // ),
     titleMedium: GoogleFonts.openSans(
-      color: primaryColor,
+      color: primary,
       fontSize: 20.0,
       fontWeight: FontWeight.w700,
     ),
     bodyLarge: GoogleFonts.openSans(
-      color: primaryColor,
+      color: primary,
       fontSize: 16.0,
       fontWeight: FontWeight.w700,
     ),
     bodyMedium: GoogleFonts.comfortaa(
-      color: primaryColor,
+      color: primary,
       fontSize: 16.0,
       fontWeight: FontWeight.w700,
     ),
     labelLarge: GoogleFonts.openSans(
-      color: secondaryColor,
+      color: primaryContainer,
       fontSize: 14.0,
       fontWeight: FontWeight.w600,
     ),
     labelSmall: GoogleFonts.openSans(
-      color: primaryColor,
+      color: primary,
       fontSize: 12.0,
       fontWeight: FontWeight.w700,
     ),
   );
-  static SliderThemeData sliderTheme = SliderThemeData(
+  static SliderThemeData sliderTheme = const SliderThemeData(
     trackHeight: 4.0,
-
-    overlayColor: primaryColor.withOpacity(0.3),
-    overlappingShapeStrokeColor: Colors.white,
-    valueIndicatorColor: primaryColor,
-    thumbColor: primaryColor,
-    activeTrackColor: primaryColor,
-    activeTickMarkColor: primaryColor,
-    inactiveTrackColor: supColor,
+    // overlayColor: primary.withOpacity(0.3),
+    // overlappingShapeStrokeColor: Colors.white,
+    // valueIndicatorColor: primary,
+    // thumbColor: primary,
+    // activeTrackColor: primary,
+    // activeTickMarkColor: primary,
+    // inactiveTrackColor: supColor,
     inactiveTickMarkColor: Colors.transparent,
-    // disabledThumbColor: primaryColor,
-    // disabledActiveTrackColor: primaryColor,
-    // disabledActiveTickMarkColor: primaryColor,
-    // disabledInactiveTrackColor: primaryColor,
-    // disabledInactiveTickMarkColor: primaryColor,
-    overlayShape: const RoundSliderOverlayShape(
+    // disabledThumbColor: primary,
+    // disabledActiveTrackColor: primary,
+    // disabledActiveTickMarkColor: primary,
+    // disabledInactiveTrackColor: primary,
+    // disabledInactiveTickMarkColor: primary,
+    overlayShape: RoundSliderOverlayShape(
       overlayRadius: 12.0,
     ),
-    thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 10.0),
-    trackShape: const RoundedRectSliderTrackShape(),
-    rangeTrackShape: const RoundedRectRangeSliderTrackShape(),
+    thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
+    trackShape: RoundedRectSliderTrackShape(),
+    rangeTrackShape: RoundedRectRangeSliderTrackShape(),
+  );
+
+  static const CheckboxThemeData checkboxThemeData = CheckboxThemeData(
+    // activeColor: ThisTheme.color,
+    shape: CircleBorder(),
+    splashRadius: 10,
+    // fillColor: MaterialStateProperty.all(ThisTheme.primaryColor),
+    // checkColor: MaterialStateProperty.all(Colors.white),
+    // side: const BorderSide(color: ThisTheme.supColor, width: 2)
   );
 }
-
-// class ThisTextTheme extends TextTheme {
-//   ThisTextTheme({
-//     this.headlineLargeColor,
-//     this.headlineSmall2Color,
-//     this.headlineSmall3Color,
-//     this.titleMediumColor,
-//     this.titleSmallColor,
-//     this.bodyLargeColor,
-//     this.bodyMediumColor,
-//     this.labelLargeColor,
-//   }) : super(
-//             headlineLarge: GoogleFonts.openSans(
-//               color: headlineLargeColor ?? color,
-//               fontSize: 28,
-//               fontWeight: FontWeight.w800,
-//             ),
-//             headlineMedium: GoogleFonts.openSans(
-//               color: headlineSmall2Color ?? color,
-//               fontSize: 18,
-//               fontWeight: FontWeight.w700,
-//             ),
-//             headlineSmall: GoogleFonts.openSans(
-//               color: headlineSmall3Color ?? subColor,
-//               fontSize: 18,
-//               fontWeight: FontWeight.w600,
-//             ),
-//             titleMedium: GoogleFonts.openSans(
-//               color: titleMediumColor ?? color,
-//               fontSize: 18,
-//               fontWeight: FontWeight.w700,
-//             ),
-//             titleSmall: GoogleFonts.openSans(
-//               color: titleSmallColor ?? color,
-//               fontSize: 20,
-//               fontWeight: FontWeight.w600,
-//             ),
-//             bodyLarge: GoogleFonts.openSans(
-//               color: bodyLargeColor ?? subColor,
-//               fontSize: 14,
-//               fontWeight: FontWeight.w600,
-//             ),
-//             bodyMedium: GoogleFonts.openSans(
-//               color: bodyMediumColor ?? subColor,
-//               fontSize: 14,
-//               fontWeight: FontWeight.w600,
-//             ),
-//             labelLarge: GoogleFonts.openSans(
-//               color: labelLargeColor ?? subColor,
-//               fontSize: 23,
-//               fontWeight: FontWeight.w600,
-//             ));
-
-//   static Color color = const Color.fromARGB(255, 42, 42, 42);
-//   static Color subColor = const Color(0xffB6B6B6);
-//   final Color? headlineLargeColor;
-//   final Color? headlineSmall2Color;
-//   final Color? headlineSmall3Color;
-//   final Color? titleMediumColor;
-//   final Color? titleSmallColor;
-//   final Color? bodyLargeColor;
-//   final Color? bodyMediumColor;
-//   final Color? labelLargeColor;
-// }
