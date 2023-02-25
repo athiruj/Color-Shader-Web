@@ -1,3 +1,4 @@
+import 'package:color_shader_website/widgets/color_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,7 @@ class _LightPaletteState extends State<LightPalette> {
         children: [
           for (var i in provider.lightPalette())
             Expanded(
-              child: Container(color: i),
+              child: ThisColorContainer(color: i,text: i.toString(),),
             )
         ],
       );

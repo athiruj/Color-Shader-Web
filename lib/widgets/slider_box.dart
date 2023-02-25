@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SliderBox extends StatelessWidget {
-  const SliderBox({
+class ThisSliderBox extends StatelessWidget {
+  const ThisSliderBox({
     super.key,
     this.width,
     required this.title,
@@ -59,7 +59,7 @@ class SliderBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width ?? 540.0,
+      width: width ?? 530.0,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,

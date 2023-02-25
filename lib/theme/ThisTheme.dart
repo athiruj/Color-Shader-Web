@@ -43,6 +43,13 @@ class ThisTheme {
       color: primary,
       fontSize: 20.0,
       fontWeight: FontWeight.w700,
+      // letterSpacing: 0.8,
+      // wordSpacing: 0.5
+    ),
+    titleSmall: GoogleFonts.openSans(
+      color: primary.withOpacity(0.38),
+      fontSize: 20.0,
+      fontWeight: FontWeight.w700,
     ),
     bodyLarge: GoogleFonts.openSans(
       color: primary,
@@ -54,6 +61,7 @@ class ThisTheme {
       fontSize: 16.0,
       fontWeight: FontWeight.w700,
     ),
+
     labelLarge: GoogleFonts.openSans(
       color: primaryContainer,
       fontSize: 14.0,
@@ -88,7 +96,7 @@ class ThisTheme {
     rangeTrackShape: RoundedRectRangeSliderTrackShape(),
   );
 
-  static const CheckboxThemeData checkboxThemeData = CheckboxThemeData(
+  static const CheckboxThemeData checkboxTheme = CheckboxThemeData(
     // activeColor: ThisTheme.color,
     shape: CircleBorder(),
     splashRadius: 10,
@@ -96,4 +104,40 @@ class ThisTheme {
     // checkColor: MaterialStateProperty.all(Colors.white),
     // side: const BorderSide(color: ThisTheme.supColor, width: 2)
   );
+
+  static TabBarTheme tabBarTheme = TabBarTheme(
+    indicator: const BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(50)),
+      color: primary,
+    ),
+    indicatorSize: TabBarIndicatorSize.tab,
+    labelColor: Colors.white,
+    labelPadding: EdgeInsets.zero,
+    labelStyle: ThisTheme.textTheme.bodyLarge,
+    // mouseCursor: ,
+    overlayColor: MaterialStateProperty.resolveWith((states) {
+      return ThisTheme.primary.withOpacity(0.38);
+    }),
+    // splashFactory: ,
+    unselectedLabelColor: ThisTheme.primary,
+    unselectedLabelStyle: ThisTheme.textTheme.bodyLarge,
+  );
 }
+
+// class ThisTabColorState extends MaterialStateProperty<Color> {
+//   const ThisTabColorState() : super(_defaultColor);
+
+//   static const int _defaultColor = 0x00000000;
+//   static const int _pressedColor = 0x08000000;
+
+//   @override
+//   Color resolve(Set<MaterialState> states) {
+//     if (states.contains(MaterialState.pressed)) {
+//       return const Color(_pressedColor);
+//     }
+//     if (states.contains(MaterialState.selected)) {
+//       return const Color(0xff000000);
+//     }
+//     return const Color(_defaultColor);
+//   }
+// }
