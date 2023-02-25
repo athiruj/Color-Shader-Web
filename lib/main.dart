@@ -44,9 +44,10 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) { 
     return Stack(
       children: [
-        const Desktop(),
+        Desktop(mobile: constraints.maxWidth <= 560 ? true : false),
         DropdownAlert(
           titleStyle: GoogleFonts.openSans(
             color: Colors.white,
@@ -56,5 +57,7 @@ class MyHomePage extends StatelessWidget {
         )
       ],
     );
+    },) ;
+    
   }
 }

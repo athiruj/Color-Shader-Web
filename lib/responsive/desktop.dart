@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 
 class Desktop extends StatefulWidget {
-  const Desktop({super.key});
+  const Desktop({super.key,this.mobile = false});
+
+  final bool mobile;
 
   @override
   State<Desktop> createState() => _DesktopState();
@@ -19,12 +21,15 @@ class _DesktopState extends State<Desktop> {
     final tabPage = TabPage.of(context);
     return Scaffold(
       body: Stack(children: <Widget>[
-        TabBarView(
-          controller: tabPage.controller,
-          children: [
-            for (final stack in tabPage.stacks)
-              PageStackNavigator(stack: stack),
-          ],
+        RotatedBox(
+          quarterTurns: widget.mobile ? -1 :0,
+          child: TabBarView(
+            controller: tabPage.controller,
+            children: [
+              for (final stack in tabPage.stacks)
+                PageStackNavigator(stack: stack),
+            ],
+          ),
         ),
         Align(
           alignment: Alignment.center,

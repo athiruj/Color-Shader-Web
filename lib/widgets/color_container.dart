@@ -39,6 +39,7 @@ class ThisColorContainer extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               defaultValue
                   ? Icon(
