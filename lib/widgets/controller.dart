@@ -55,14 +55,16 @@ class _ControllerState extends State<Controller> {
                   ),
                 )),
                 IconButton(
-                  iconSize: 46,
-                  padding: EdgeInsets.zero,
+                    iconSize: 46,
+                    padding: EdgeInsets.zero,
                     alignment: Alignment.center,
                     onPressed: () => setState(() {
                           visible = !visible;
                         }),
                     icon: Icon(
-                      visible ? Remix.close_circle_fill : Remix.arrow_down_circle_fill,
+                      visible
+                          ? Remix.close_circle_fill
+                          : Remix.arrow_down_circle_fill,
                       color: Theme.of(context).colorScheme.onPrimary,
                       size: 28,
                     ))

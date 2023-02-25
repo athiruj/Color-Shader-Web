@@ -17,12 +17,13 @@ class _PaletteState extends State<Palette> {
     return Consumer(builder: (context, ValuesProvider provider, Widget? child) {
       return Row(
         children: [
-          for (var i =0 ; i < provider.palette().length ; i++)
+          for (var i = 0; i < provider.palette().length; i++)
             Expanded(
               child: ThisColorContainer(
                 defaultValue: i == provider.index ? true : false,
                 color: provider.palette()[i],
-                text: provider.palette()[i]
+                text: provider
+                    .palette()[i]
                     .toString()
                     .split('Color(0xff')[1]
                     .split(')')[0]
