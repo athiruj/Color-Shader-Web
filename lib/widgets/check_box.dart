@@ -54,8 +54,6 @@ class ThisCheckbox extends StatelessWidget {
     return SizedBox(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        // crossAxisAlignment: CrossAxisAlignment.center,
-        // mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0),

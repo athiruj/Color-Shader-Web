@@ -1,20 +1,23 @@
 import 'package:color_shader_website/providers/value_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:flutter/src/widgets/container.dart';
-// import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
 class InputField extends StatelessWidget {
-  const InputField({super.key});
+  const InputField({super.key, this.width, this.height});
+
+  final double? height;
+
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
+    TextEditingController controller =
+        TextEditingController(text: ValuesProvider.defaultValue);
 
     return Container(
-      width: 566,
-      height: 56,
+      width: width ?? 530,
+      height: height ?? 56,
       alignment: Alignment.center,
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.background,
@@ -24,7 +27,9 @@ class InputField extends StatelessWidget {
       child: Consumer(
         builder: (context, ValuesProvider provider, Widget? child) {
           void onChanged(String value) {
-            controller.text == '' ? null : provider.setValue(value);
+            if (value.length == 6) {
+              controller.text == '' ? null : provider.setValue(value);
+            }
           }
 
           return TextField(

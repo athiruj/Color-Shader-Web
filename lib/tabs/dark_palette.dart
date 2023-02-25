@@ -19,7 +19,14 @@ class _DarkPaletteState extends State<DarkPalette> {
         children: [
           for (var i in provider.darkPalette())
             Expanded(
-              child: ThisColorContainer(color: i,text: i.toString(),),
+              child: ThisColorContainer(
+                color: i,
+                text: i
+                    .toString()
+                    .split('Color(0xff')[1]
+                    .split(')')[0]
+                    .toUpperCase(),
+              ),
             )
         ],
       );

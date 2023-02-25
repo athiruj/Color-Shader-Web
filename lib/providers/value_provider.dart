@@ -2,8 +2,8 @@ import 'package:color_shader/color_shader.dart';
 import 'package:flutter/foundation.dart';
 
 class ValuesProvider with ChangeNotifier {
-  static const defaultValue = "FF0000";
-  String value = "FF0000";
+  static const defaultValue = "8DB88F";
+  String value = "8DB88F";
   int shades = 10;
   int index = 5;
   bool fullScale = false;

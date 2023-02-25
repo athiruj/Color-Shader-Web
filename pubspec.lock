@@ -83,6 +83,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_dropdown_alert:
+    dependency: "direct main"
+    description:
+      name: flutter_dropdown_alert
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.7"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -247,6 +254,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.5"
+  remixicon:
+    dependency: "direct main"
+    description:
+      name: remixicon
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   responsive_builder:
     dependency: "direct main"
     description:

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown_alert/dropdown_alert.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
-import 'theme/thistheme.dart';
+import 'theme/theme.dart';
 
 import '/routes.dart';
 import 'providers/value_provider.dart';
 import 'responsive/desktop.dart';
-import 'responsive/tablet.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,17 +44,17 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Size screenSize = WidgetsBinding.instance.window.physicalSize;
-    // double width = screenSize.width;
-    // double height = screenSize.height;
-    // Ratio size = Ratio(maxHeight: height, maxWidth: width);
-    return LayoutBuilder(
-      builder: ((BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth > 740) {
-          return const Desktop();
-        }
-        return const Tablet();
-      }),
+    return Stack(
+      children: [
+        const Desktop(),
+        DropdownAlert(
+          titleStyle: GoogleFonts.openSans(
+            color: Colors.white,
+            fontSize: 20.0,
+            fontWeight: FontWeight.w700,
+          ),
+        )
+      ],
     );
   }
 }

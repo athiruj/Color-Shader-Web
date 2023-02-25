@@ -17,9 +17,17 @@ class _PaletteState extends State<Palette> {
     return Consumer(builder: (context, ValuesProvider provider, Widget? child) {
       return Row(
         children: [
-          for (var i in provider.palette())
+          for (var i =0 ; i < provider.palette().length ; i++)
             Expanded(
-              child: ThisColorContainer(color: i,text: i.toString(),),
+              child: ThisColorContainer(
+                defaultValue: i == provider.index ? true : false,
+                color: provider.palette()[i],
+                text: provider.palette()[i]
+                    .toString()
+                    .split('Color(0xff')[1]
+                    .split(')')[0]
+                    .toUpperCase(),
+              ),
             )
         ],
       );

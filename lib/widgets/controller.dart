@@ -2,247 +2,142 @@ import 'package:color_shader_website/providers/value_provider.dart';
 import 'package:color_shader_website/widgets/check_box.dart';
 import 'package:color_shader_website/widgets/slider_box.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:remixicon/remixicon.dart';
 
 class Controller extends StatefulWidget {
-  const Controller({super.key});
+  const Controller({super.key, this.tapHeight, this.height, this.width});
+
+  final double? tapHeight;
+
+  final double? height;
+
+  final double? width;
 
   @override
   State<Controller> createState() => _ControllerState();
 }
 
 class _ControllerState extends State<Controller> {
+  bool visible = false;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 566,
-      height: 300,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
-        borderRadius: const BorderRadius.all(Radius.circular(23)),
-      ),
-      child:
-          Consumer(builder: (context, ValuesProvider provider, Widget? child) {
-        return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              ThisCheckbox(
-                value: provider.fullScale,
-                scale: 1.35,
-                title: 'FullScale',
-                subTitle: 'black white full range safety',
-                onChanged: (_) async {
-                  setState(() => provider.setFullScale(!provider.fullScale));
-                },
-              ),
-              ThisSliderBox(
-                  title: 'Shader',
-                  subTitle: 'number of shades in palette',
-                  value: provider.shades.toDouble(),
-                  max: 20,
-                  min: 2,
-                  divisions: 18,
-                  onChanged: (newValue) async {
-                    setState(() => provider.setShades(newValue.round()));
-                  }),
-              ThisSliderBox(
-                  title: 'Index',
-                  subTitle: "Position of default Color in palette",
-                  value: provider.index > provider.shades - 1
-                      ? (provider.shades / 2).floor().toDouble()
-                      : provider.index.toDouble(),
-                  max: provider.shades - 1,
-                  maxLabel: (provider.shades - 1).round().toString(),
-                  min: 0,
-                  divisions: provider.shades.round() - 1,
-                  onChanged: (newValue) async {
-                    setState(() => provider.setIndex(newValue.round()));
-                  }),
-              ThisSliderBox(
-                  title: 'Scale',
-                  subTitle: "Percent of shade value per Color",
-                  value: provider.scale,
-                  max: 100,
-                  maxLabel: "100%",
-                  min: 0,
-                  minLabel: "0%",
-                  divisions: 10,
-                  onChanged: (newValue) async {
-                    setState(() => provider.setScale(newValue));
-                  }),
-            ]);
-      }),
+    return Column(
+      children: [
+        Container(
+          height: widget.tapHeight ?? 34,
+          width: widget.width ?? 530,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
+            borderRadius: BorderRadius.vertical(
+                top: const Radius.circular(23),
+                bottom: visible ? Radius.zero : const Radius.circular(23)),
+          ),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                const SizedBox(
+                  width: 46,
+                ),
+                Expanded(
+                    child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    visible ? 'CONTROLLER' : 'OPEN CONTROLLER',
+                    style: GoogleFonts.openSans(
+                      fontSize: 16,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                )),
+                IconButton(
+                  iconSize: 46,
+                  padding: EdgeInsets.zero,
+                    alignment: Alignment.center,
+                    onPressed: () => setState(() {
+                          visible = !visible;
+                        }),
+                    icon: Icon(
+                      visible ? Remix.close_circle_fill : Remix.arrow_down_circle_fill,
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      size: 28,
+                    ))
+              ]),
+        ),
+        Visibility(
+          visible: visible,
+          child: Container(
+            height: widget.height ?? 300,
+            width: widget.width ?? 530,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.background,
+              borderRadius:
+                  const BorderRadius.vertical(bottom: Radius.circular(23)),
+            ),
+            child: Consumer(
+                builder: (context, ValuesProvider provider, Widget? child) {
+              return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    ThisCheckbox(
+                      value: provider.fullScale,
+                      scale: 1.35,
+                      title: 'FullScale',
+                      subTitle: 'black white full range safety',
+                      onChanged: (_) async {
+                        setState(
+                            () => provider.setFullScale(!provider.fullScale));
+                      },
+                    ),
+                    ThisSliderBox(
+                        width: widget.width! - 30,
+                        title: 'Shader',
+                        subTitle: 'number of shades in palette',
+                        value: provider.shades.toDouble(),
+                        max: 20,
+                        min: 2,
+                        divisions: 18,
+                        onChanged: (newValue) async {
+                          setState(() => provider.setShades(newValue.round()));
+                        }),
+                    ThisSliderBox(
+                        width: widget.width! - 30,
+                        title: 'Index',
+                        subTitle: "Position of default Color in palette",
+                        value: provider.index > provider.shades - 1
+                            ? (provider.shades / 2).floor().toDouble()
+                            : provider.index.toDouble(),
+                        max: provider.shades - 1,
+                        maxLabel: (provider.shades - 1).round().toString(),
+                        min: 0,
+                        divisions: provider.shades.round() - 1,
+                        onChanged: (newValue) async {
+                          setState(() => provider.setIndex(newValue.round()));
+                        }),
+                    ThisSliderBox(
+                        width: widget.width! - 30,
+                        title: 'Scale',
+                        subTitle: "Percent of shade value per Color",
+                        value: provider.scale,
+                        max: 100,
+                        maxLabel: "100%",
+                        min: 0,
+                        minLabel: "0%",
+                        divisions: 10,
+                        onChanged: (newValue) async {
+                          setState(() => provider.setScale(newValue));
+                        }),
+                  ]);
+            }),
+          ),
+        ),
+      ],
     );
   }
 }
-// TextEditingController controller =
-//     TextEditingController(text: ValuesProvider.defaultValue);
-// @override
-// Widget build(BuildContext context) {
-//   return BackdropFilter(
-//     filter: ImageFilter.blur(sigmaX: 0.1, sigmaY: 0.1),
-//     child: Container(
-//       width: 540,
-//       decoration: const BoxDecoration(
-//           color: Colors.white30,
-//           borderRadius: BorderRadius.all(Radius.circular(10.0))),
-//       child: Padding(
-//         padding: const EdgeInsets.all(10.0),
-//         child: Consumer(
-//           builder: (context, ValuesProvider provider, Widget? child) {
-//             return Wrap(
-//               direction: Axis.horizontal,
-//               // runAlignment: WrapAlignment.spaceBetween,
-//               // spacing: 20,
-//               runSpacing: 20,
-//               // crossAxisAlignment: WrapCrossAlignment.start,
-
-//               children: [
-//                 Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     SizedBox(
-//                       width: 140,
-//                       height: 56,
-//                       child: TextFormField(
-//                         controller: controller,
-//                         autofocus: true,
-//                         textCapitalization: TextCapitalization.words,
-//                         obscureText: false,
-//                         maxLength: 6,
-//                         maxLengthEnforcement: MaxLengthEnforcement.enforced,
-//                         decoration: InputDecoration(
-//                           counter: const SizedBox(),
-
-//                           hintText: '000000',
-//                           hintStyle: Theme.of(context).textTheme.bodyLarge,
-//                           enabledBorder: UnderlineInputBorder(
-//                             borderSide: BorderSide(
-//                               color: Theme.of(context).disabledColor,
-//                               width: 2,
-//                             ),
-//                             // borderRadius: BorderRadius.only(
-//                             //   topLeft: Radius.circular(4.0),
-//                             //   topRight: Radius.circular(4.0),
-//                             // ),
-//                           ),
-//                           focusedBorder: UnderlineInputBorder(
-//                             borderSide: BorderSide(
-//                               color: Theme.of(context).primaryColorDark,
-//                               width: 2,
-//                             ),
-//                             // borderRadius: BorderRadius.only(
-//                             //   topLeft: Radius.circular(4.0),
-//                             //   topRight: Radius.circular(4.0),
-//                             // ),
-//                           ),
-//                           errorBorder: const UnderlineInputBorder(
-//                             borderSide: BorderSide(
-//                               color: Color(0xffff0000),
-//                               width: 2,
-//                             ),
-//                             // borderRadius: BorderRadius.only(
-//                             //   topLeft: Radius.circular(4.0),
-//                             //   topRight: Radius.circular(4.0),
-//                             // ),
-//                           ),
-//                           // focusedErrorBorder:
-//                           //     const UnderlineInputBorder(
-//                           //   borderSide: BorderSide(
-//                           //     color: Color(0x00000000),
-//                           //     width: 1,
-//                           //   ),
-//                           //   borderRadius: BorderRadius.only(
-//                           //     topLeft: Radius.circular(4.0),
-//                           //     topRight: Radius.circular(4.0),
-//                           //   ),
-//                           // ),
-//                         ),
-//                         style: Theme.of(context).textTheme.titleMedium,
-//                         textAlign: TextAlign.center,
-//                         inputFormatters: [
-//                           FilteringTextInputFormatter.allow(
-//                               RegExp('[0123456789abcdefABCDEF]'))
-//                         ],
-//                         onChanged: ((value) {
-//                           controller.text == ''
-//                               ? null
-//                               : provider.setValue(value.toUpperCase());
-//                           controller.text =
-//                               controller.text == '' ? '' : provider.value;
-//                           controller.selection = TextSelection.collapsed(
-//                               offset: provider.value.length);
-//                         }),
-//                       ),
-//                     ),
-//                     Row(
-//                       mainAxisSize: MainAxisSize.max,
-//                       children: [
-//                         Padding(
-//                           padding: const EdgeInsets.only(right: 12.0),
-//                           child: Transform.scale(
-//                             scale: 1.3,
-//                             child: Checkbox(
-//                               value: provider.fullScale,
-//                               onChanged: (_) async {
-//                                 setState(() => provider
-//                                     .setFullScale(!provider.fullScale));
-//                               },
-//                               // activeColor:
-//                               // Theme.of(context).primaryColor,
-//                             ),
-//                           ),
-//                         ),
-//                         Text(
-//                           'FullScale',
-//                           style: Theme.of(context).textTheme.titleMedium,
-//                         ),
-//                       ],
-//                     ),
-//                   ],
-//                 ),
-//                 SliderBox(
-//                     title: 'Shader',
-//                     subTitle: "   Number of Shades in palette",
-//                     value: provider.shades.toDouble(),
-//                     max: 20,
-//                     min: 2,
-//                     divisions: 18,
-//                     onChanged: (newValue) async {
-//                       setState(() => provider.setShades(newValue.round()));
-//                     }),
-//                 SliderBox(
-//                     title: 'Index',
-//                     subTitle: "   Position of default Color in palette",
-//                     value: provider.index > provider.shades - 1
-//                         ? (provider.shades / 2).floor().toDouble()
-//                         : provider.index.toDouble(),
-//                     max: provider.shades - 1,
-//                     maxLabel: (provider.shades - 1).round().toString(),
-//                     min: 0,
-//                     divisions: provider.shades.round() - 1,
-//                     onChanged: (newValue) async {
-//                       setState(() => provider.setIndex(newValue.round()));
-//                     }),
-//                 SliderBox(
-//                     title: 'Scale',
-//                     subTitle: "   Percent of shade value per Color",
-//                     value: provider.scale,
-//                     max: 100,
-//                     maxLabel: "100%",
-//                     min: 0,
-//                     minLabel: "0%",
-//                     divisions: 10,
-//                     onChanged: (newValue) async {
-//                       setState(() => provider.setScale(newValue));
-//                     }),
-//               ],
-//             );
-//           },
-//         ),
-//       ),
-//     ),
-//   );
-// }
