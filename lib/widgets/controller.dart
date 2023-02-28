@@ -82,60 +82,64 @@ class _ControllerState extends State<Controller> {
             ),
             child: Consumer(
                 builder: (context, ValuesProvider provider, Widget? child) {
-              return Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    ThisCheckbox(
-                      value: provider.fullScale,
-                      scale: 1.35,
-                      title: 'FullScale',
-                      subTitle: 'black white full range safety',
-                      onChanged: (_) async {
-                        setState(
-                            () => provider.setFullScale(!provider.fullScale));
-                      },
-                    ),
-                    ThisSliderBox(
-                        width: widget.width! - 30,
-                        title: 'Shader',
-                        subTitle: 'number of shades in palette',
-                        value: provider.shades.toDouble(),
-                        max: 20,
-                        min: 2,
-                        divisions: 18,
-                        onChanged: (newValue) async {
-                          setState(() => provider.setShades(newValue.round()));
-                        }),
-                    ThisSliderBox(
-                        width: widget.width! - 30,
-                        title: 'Index',
-                        subTitle: "Position of default Color in palette",
-                        value: provider.index > provider.shades - 1
-                            ? (provider.shades / 2).floor().toDouble()
-                            : provider.index.toDouble(),
-                        max: provider.shades - 1,
-                        maxLabel: (provider.shades - 1).round().toString(),
-                        min: 0,
-                        divisions: provider.shades.round() - 1,
-                        onChanged: (newValue) async {
-                          setState(() => provider.setIndex(newValue.round()));
-                        }),
-                    ThisSliderBox(
-                        width: widget.width! - 30,
-                        title: 'Scale',
-                        subTitle: "Percent of shade value per Color",
-                        value: provider.scale,
-                        max: 100,
-                        maxLabel: "100%",
-                        min: 0,
-                        minLabel: "0%",
-                        divisions: 10,
-                        onChanged: (newValue) async {
-                          setState(() => provider.setScale(newValue));
-                        }),
-                  ]);
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      ThisCheckbox(
+                        value: provider.fullScale,
+                        scale: 1.35,
+                        title: 'FullScale',
+                        subTitle: 'black white full range safety',
+                        onChanged: (_) async {
+                          setState(
+                              () => provider.setFullScale(!provider.fullScale));
+                        },
+                      ),
+                      ThisSliderBox(
+                          width: widget.width! - 30,
+                          title: 'Shader',
+                          subTitle: 'number of shades in palette',
+                          value: provider.shades.toDouble(),
+                          max: 20,
+                          min: 2,
+                          divisions: 18,
+                          onChanged: (newValue) async {
+                            setState(
+                                () => provider.setShades(newValue.round()));
+                          }),
+                      ThisSliderBox(
+                          width: widget.width! - 30,
+                          title: 'Index',
+                          subTitle: "Position of default Color in palette",
+                          value: provider.index > provider.shades - 1
+                              ? (provider.shades / 2).floor().toDouble()
+                              : provider.index.toDouble(),
+                          max: provider.shades - 1,
+                          maxLabel: (provider.shades - 1).round().toString(),
+                          min: 0,
+                          divisions: provider.shades.round() - 1,
+                          onChanged: (newValue) async {
+                            setState(() => provider.setIndex(newValue.round()));
+                          }),
+                      ThisSliderBox(
+                          width: widget.width! - 30,
+                          title: 'Scale',
+                          subTitle: "Percent of shade value per Color",
+                          value: provider.scale,
+                          max: 100,
+                          maxLabel: "100%",
+                          min: 0,
+                          minLabel: "0%",
+                          divisions: 10,
+                          onChanged: (newValue) async {
+                            setState(() => provider.setScale(newValue));
+                          }),
+                    ]),
+              );
             }),
           ),
         ),

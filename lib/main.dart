@@ -44,20 +44,21 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) { 
-    return Stack(
-      children: [
-        Desktop(mobile: constraints.maxWidth <= 560 ? true : false),
-        DropdownAlert(
-          titleStyle: GoogleFonts.openSans(
-            color: Colors.white,
-            fontSize: 20.0,
-            fontWeight: FontWeight.w700,
-          ),
-        )
-      ],
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Stack(
+          children: [
+            Desktop(mobile: constraints.maxWidth <= 560 ? true : false),
+            DropdownAlert(
+              titleStyle: GoogleFonts.openSans(
+                color: Colors.white,
+                fontSize: 20.0,
+                fontWeight: FontWeight.w700,
+              ),
+            )
+          ],
+        );
+      },
     );
-    },) ;
-    
   }
 }

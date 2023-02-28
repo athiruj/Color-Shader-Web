@@ -6,7 +6,7 @@ import '../providers/value_provider.dart';
 
 class Palette extends StatefulWidget {
   const Palette({super.key});
-
+  // final Axis direction;
   @override
   State<Palette> createState() => _PaletteState();
 }
@@ -18,17 +18,15 @@ class _PaletteState extends State<Palette> {
       return Row(
         children: [
           for (var i = 0; i < provider.palette().length; i++)
-            Expanded(
-              child: ThisColorContainer(
-                defaultValue: i == provider.index ? true : false,
-                color: provider.palette()[i],
-                text: provider
-                    .palette()[i]
-                    .toString()
-                    .split('Color(0xff')[1]
-                    .split(')')[0]
-                    .toUpperCase(),
-              ),
+            ThisColorContainer(
+              defaultValue: i == provider.index ? true : false,
+              color: provider.palette()[i],
+              text: provider
+                  .palette()[i]
+                  .toString()
+                  .split('Color(0xff')[1]
+                  .split(')')[0]
+                  .toUpperCase(),
             )
         ],
       );

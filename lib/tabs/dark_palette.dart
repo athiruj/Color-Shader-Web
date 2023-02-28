@@ -18,15 +18,13 @@ class _DarkPaletteState extends State<DarkPalette> {
       return Row(
         children: [
           for (var i in provider.darkPalette())
-            Expanded(
-              child: ThisColorContainer(
-                color: i,
-                text: i
-                    .toString()
-                    .split('Color(0xff')[1]
-                    .split(')')[0]
-                    .toUpperCase(),
-              ),
+            ThisColorContainer(
+              color: i,
+              text: i
+                  .toString()
+                  .split('Color(0xff')[1]
+                  .split(')')[0]
+                  .toUpperCase(),
             )
         ],
       );

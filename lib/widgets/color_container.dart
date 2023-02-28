@@ -20,57 +20,60 @@ class ThisColorContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: color,
-      child: TextButton(
-        onPressed: () async {
-          await Clipboard.setData(ClipboardData(text: text));
-          AlertController.show("Copied", "Copy Success!", TypeAlert.success);
-        },
-        style: ButtonStyle(
-            overlayColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.hovered)) {
-            return Colors.black.withOpacity(0.1);
-          }
-          return color;
-        })),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          alignment: Alignment.bottomCenter,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              defaultValue
-                  ? Icon(
-                      Remix.star_fill,
-                      size: 28,
-                      color: Theme.of(context).colorScheme.primary,
-                    )
-                  : const SizedBox(),
-              const SizedBox(
-                height: 16,
-              ),
-              RotatedBox(
-                  quarterTurns: 1,
-                  child: Container(
-                    width: 80,
-                    height: 30,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.background,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(15))),
-                    child: Text(
-                      text,
-                      style: GoogleFonts.openSans(
+    return Expanded(
+      child: Container(
+        // width: double.maxFinite,
+        color: color,
+        child: TextButton(
+          onPressed: () async {
+            await Clipboard.setData(ClipboardData(text: text));
+            AlertController.show("Copied", "Copy Success!", TypeAlert.success);
+          },
+          style: ButtonStyle(
+              overlayColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.hovered)) {
+              return Colors.black.withOpacity(0.1);
+            }
+            return color;
+          })),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                defaultValue
+                    ? Icon(
+                        Remix.star_fill,
+                        size: 28,
                         color: Theme.of(context).colorScheme.primary,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w700,
+                      )
+                    : const SizedBox(),
+                const SizedBox(
+                  height: 16,
+                ),
+                RotatedBox(
+                    quarterTurns: 1,
+                    child: Container(
+                      width: 80,
+                      height: 30,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.background,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(15))),
+                      child: Text(
+                        text,
+                        style: GoogleFonts.openSans(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                    ),
-                  )),
-            ],
+                    )),
+              ],
+            ),
           ),
         ),
       ),

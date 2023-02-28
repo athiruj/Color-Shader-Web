@@ -8,6 +8,12 @@ class ValuesProvider with ChangeNotifier {
   int index = 5;
   bool fullScale = false;
   double scale = 100;
+  bool mobile = false;
+
+  void setMobile(bool state) {
+    mobile = state;
+    notifyListeners();
+  }
   // String getValue() => value;
   // int getShades() => shades;
   // int getIndex() => index;
